@@ -44,7 +44,7 @@ tests = [
     ('adh_dodec_mi200_commands', 10000),
     ('stmv_stream_commands', 10000),
     ('stmv_dodec_mi100_commands', 10000),
-    ('stmv_dodec_mi200_commands', 10000)
+    ('stmv_dodec_mi200_commands', 10000),
     ('celluloze_nve_stream_commands', 10000),
     ('celluloze_nve_dodec_mi100_commands', 10000),
     ('celluloze_nve_dodec_mi200_commands', 10000)
@@ -79,7 +79,7 @@ for precision in precisions:
         results = []
         resultsFileName = 'results.stats.csv'
         if args.platform == 'HIP':
-            r = os.system(f'rocprof --basenames on --stats python3 benchmark.py --platform=HIP --test={test} --steps={steps} --profile')
+            r = os.system(f'rocprof --basenames on --stats python3 benchmark.py --test={test} --steps={steps} --profile')
             if r:
                 continue
             # resultsFileName = '2021-07-19-gbsa-mi100-0.csv'
@@ -95,7 +95,7 @@ for precision in precisions:
                         float(row[4]) / 100
                     ))
         elif args.platform == 'CUDA':
-            r = os.system(f'nvprof --demangling off --profile-api-trace none --concurrent-kernels off --csv --log-file {resultsFileName} python3 benchmark.py --platform=CUDA --test={test} --steps={steps} --profile')
+            r = os.system(f'nvprof --demangling off --profile-api-trace none --concurrent-kernels off --csv --log-file {resultsFileName} python3 benchmark.py --test={test} --steps={steps} --profile')
             if r:
                 continue
             # resultsFileName = '2021-07-19-gbsa-titanv-0.csv'
