@@ -1,5 +1,6 @@
 import os
 import csv
+import glob
 import argparse
 
 import openpyxl
@@ -95,11 +96,18 @@ for precision in precisions:
                         float(row[4]) / 100
                     ))
         elif args.platform == 'CUDA':
-            r = os.system(f'nvprof --demangling off --profile-api-trace none --concurrent-kernels off --csv --log-file {resultsFileName} python3 benchmark.py --test={test} --steps={steps} --profile')
+            r = os.system(f'CUDA_VISIBLE_DEVICES=1  nvprof --profile-child-processes --demangling off --profile-api-trace none --concurrent-kernels off --csv --log-file {resultsFileName}-%p python3 benchmark.py --test={test} --steps={steps} --profile')
             if r:
                 continue
+            result_csvs = glob.glob('results.stats.csv-*')
+
+            print(result_csvs)
+
+            if len(result_csvs) != 1:
+                print('Error at results csv file searches')
+
             # resultsFileName = '2021-07-19-gbsa-titanv-0.csv'
-            with open(resultsFileName, newline='') as csvfile:
+            with open(result_csvs[0], newline='') as csvfile:
                 reader = csv.reader(csvfile)
                 # nvprof adds some info before the table
                 while next(reader)[0] != 'Type':
@@ -118,6 +126,7 @@ for precision in precisions:
                         float(row[4]) * m4,
                         float(row[1]) / 100
                     ))
+                os.remove(result_csvs[0])
         wsName = f'{precision[0]}-{test}'
         ws = None
         compareCol = None
