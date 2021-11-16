@@ -31,35 +31,35 @@ def downloadAmberSuite():
         tarfh = tarfile.open(filename, 'r:gz')
         tarfh.extractall(path=dirname)
     return dirname
-    
+
 def runOneTest(testName, options):
     """Perform a single benchmarking simulation."""
     steps = 1000
     if options.steps:
         steps = options.steps
-    
+
     if testName == 'adh_dodec_stream_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 1 -ntomp 48 -noconfout -nb gpu -bonded cpu -pme gpu -v -gpu_id 0 -s adh_dodec/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 10000 -ntmpi 1 -ntomp 48 -noconfout -nb gpu -bonded cpu -pme gpu -v -gpu_id 0 -s adh_dodec/topol.tpr')
     elif testName == 'adh_dodec_mi100_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s adh_dodec/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 10000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s adh_dodec/topol.tpr')
     elif testName == 'adh_dodec_mi200_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s adh_dodec/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 10000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s adh_dodec/topol.tpr')
     elif testName == 'stmv_stream_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 2 -ntomp 24 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s stmv/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 1000 -ntmpi 2 -ntomp 24 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s stmv/topol.tpr')
     elif testName == 'stmv_dodec_mi100_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s stmv/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 1000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s stmv/topol.tpr')
     elif testName == 'stmv_dodec_mi200_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s stmv/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 1000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s stmv/topol.tpr')
     elif testName == 'celluloze_nve_stream_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s cellulose_nve/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 1000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s cellulose_nve/topol.tpr')
     elif testName == 'celluloze_nve_dodec_mi100_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s cellulose_nve/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 1000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s cellulose_nve/topol.tpr')
     elif testName == 'celluloze_nve_dodec_mi200_commands':
-        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 90000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s cellulose_nve/topol.tpr')
+        os.system(f'/usr/local/gromacs/bin/gmx mdrun -pin on -nsteps {steps} -resetstep 1000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s cellulose_nve/topol.tpr')
     else:
         print('Unknown test')
         return 0
-    
+
     # if options.steps:
     #     steps = options.steps
     #     time = timeIntegration(context, steps, initialSteps)
