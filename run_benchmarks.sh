@@ -76,7 +76,7 @@ run_tmpi_stream(){
     echo "running threaded mpi mode"
 
     cd $_CWD
-    ./gromacs_tmpi.sh $out_dir
+    ./gromacs_tmpi_stream.sh $out_dir
 }
 
 export GMX_GPU_DD_COMMS=1
