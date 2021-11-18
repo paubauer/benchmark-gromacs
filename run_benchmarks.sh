@@ -72,6 +72,13 @@ run_tmpi(){
     ./gromacs_tmpi.sh $out_dir
 }
 
+run_tmpi_stream(){
+    echo "running threaded mpi mode"
+
+    cd $_CWD
+    ./gromacs_tmpi.sh $out_dir
+}
+
 export GMX_GPU_DD_COMMS=1
 export GMX_GPU_PME_PP_COMMS=1
 export GMX_FORCE_UPDATE_DEFAULT_GPU=1
@@ -84,4 +91,8 @@ fi
 
 if [[ $run_type == "tmpi" ]]; then
     run_tmpi
+fi
+
+if [[ $run_type == "tmpi_stream" ]]; then
+    run_tmpi_stream
 fi
