@@ -6,7 +6,7 @@ if [ -z "${OUT_DIR}" ]; then
     OUT_DIR=".."
 fi
 
-OUT_FILE=${OUT_DIR}/gromacs_tmpi.txt
+OUT_FILE=${OUT_DIR}/gromacs_tmpi_stream.txt
 
 # Support execution from outside root dir
 _CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd)"
