@@ -13,7 +13,7 @@ run_benchmarks.sh [[OPTIONS]]
 General Options
 ---------------
 [-o|--out-dir <dir>] Path to output directory
-[-t|--type <mpi, tmpi, tmpi_stream>] Specify to run mpi or threaded mpi
+[-t|--type <mpi, tmpi, tmpi_stream, tmpi_init>] Specify to run mpi or threaded mpi
 )
 """
 }
@@ -44,7 +44,7 @@ parse_arguments(){
   done
 
   if [[ -z "${run_type+x}" ]]; then
-      echo "Must specify run-type -t as either 'mpi', 'tmpi' or 'tmpi_stream'"
+      echo "Must specify run-type -t as either 'mpi', 'tmpi', 'tmpi_stream' or 'tmpi_init'"
       exit -1
   fi
 
@@ -79,6 +79,12 @@ run_tmpi_stream(){
     ./gromacs_tmpi_stream.sh $out_dir
 }
 
+run_tmpi_init(){
+    echo "running threaded mpi mode"
+
+    cd $_CWD
+    ./gromacs_tmpi_init.sh $out_dir
+}
 export GMX_GPU_DD_COMMS=1
 export GMX_GPU_PME_PP_COMMS=1
 export GMX_FORCE_UPDATE_DEFAULT_GPU=1
@@ -95,4 +101,8 @@ fi
 
 if [[ $run_type == "tmpi_stream" ]]; then
     run_tmpi_stream
+fi
+
+if [[ $run_type == "tmpi_init" ]]; then
+    run_tmpi_init
 fi
