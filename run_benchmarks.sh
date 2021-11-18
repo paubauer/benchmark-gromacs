@@ -13,7 +13,7 @@ run_benchmarks.sh [[OPTIONS]]
 General Options
 ---------------
 [-o|--out-dir <dir>] Path to output directory
-[-t|--type <mpi, tmpi>] Specify to run mpi or threaded mpi
+[-t|--type <mpi, tmpi, tmpi_stream>] Specify to run mpi or threaded mpi
 )
 """
 }
@@ -44,7 +44,7 @@ parse_arguments(){
   done
 
   if [[ -z "${run_type+x}" ]]; then
-      echo "Must specify run-type -t as either 'mpi' or 'tmpi'"
+      echo "Must specify run-type -t as either 'mpi', 'tmpi' or 'tmpi_stream'"
       exit -1
   fi
 
