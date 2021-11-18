@@ -17,11 +17,11 @@ cd adh_dodec/
 tar zxf adh_dodec.tar.gz
 # 1GPU
 echo "benchmark,adh_dodec,gpus_1,rank_1,thread_64" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 1 -ntomp 48 -noconfout -nb gpu -bonded cpu -pme gpu -v -gpu_id 0 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 2GPUs
 echo "benchmark,adh_dodec,gpus_2,rank_4,thread_16" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 4 -ntomp 16 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 01 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 01 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 4GPUs
 echo "benchmark,adh_dodec,gpus_4,rank_4,thread_16" | tee -a ${OUT_FILE}
@@ -37,7 +37,7 @@ tar zxf stmv.tar.gz
 
 # 1GPU
 echo "benchmark,stmv,gpus_1,rank_1,thread_64" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 2 -ntomp 24 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 2GPUs
 echo "benchmark,stmv,gpus_2,rank_4,thread_16" | tee -a ${OUT_FILE}
@@ -45,7 +45,7 @@ gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 4 -ntomp 16 -noconfout 
 
 # 4GPUs
 echo "benchmark,stmv,gpus_4,rank_8,thread_8" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 8 -ntomp 8 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 0123 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 4 -ntomp 16 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 0123 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 8GPUs
 echo "benchmark,stmv,gpus_8,rank_8,thread_8" | tee -a ${OUT_FILE}
@@ -57,15 +57,15 @@ tar zxf cellulose_nve.tar.gz
 
 # 1GPU
 echo "benchmark,cellulose,gpus_1,rank_1,thread_64" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 1 -ntomp 64 -noconfout -nb gpu -bonded gpu -pme gpu -v -gpu_id 0 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 2 -ntomp 28 -noconfout -nb gpu -bonded cpu -pme gpu -npme 1 -v -gpu_id 0 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 2GPUs
 echo "benchmark,cellulose,gpus_2,rank_4,thread_16" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 4 -ntomp 16 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 01 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 4 -ntomp 14 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 01 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 4GPUs
 echo "benchmark,cellulose,gpus_4,rank_8,thread_8" | tee -a ${OUT_FILE}
-gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 8 -ntomp 8 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 0123 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
+gmx mdrun -pin on -nsteps 100000 -resetstep 90000 -ntmpi 4 -ntomp 16 -noconfout -nb gpu -bonded gpu -pme gpu -npme 1 -v -gpu_id 0123 -s topol.tpr 2>&1 | tee -a ${OUT_FILE}
 
 # 8GPUs
 echo "benchmark,cellulose,gpus_8,rank_8,thread_8" | tee -a ${OUT_FILE}
