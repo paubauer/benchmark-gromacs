@@ -15,3 +15,4 @@ More tips and advice on performance tuning:
 https://developer.nvidia.com/blog/creating-faster-molecular-dynamics-simulations-with-gromacs-2020/
 https://manual.gromacs.org/current/user-guide/mdrun-performance.html#running-mdrun-within-a-single-node
 
+EDIT 1
