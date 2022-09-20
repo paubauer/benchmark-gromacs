@@ -106,3 +106,5 @@ fi
 if [[ $run_type == "tmpi_init" ]]; then
     run_tmpi_init
 fi
+
+# EDIT 3
