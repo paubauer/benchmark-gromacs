@@ -1,6 +1,5 @@
 #!/bin/bash
-export ARCH_BUILDS=gfx90a,gfx940
-export ROOT=$(pwd)
+export ARCH_BUILDS=gfx908,gfx90a,gfx940
 
 if [ ! -d ./Gromacs ]; then
   git clone https://github.com/ROCmSoftwarePlatform/Gromacs.git -b develop_2023_amd_sprint_rocm6 Gromacs
@@ -32,17 +31,12 @@ if [ ! -d ./Gromacs ]; then
     cd ../../
 fi
 
-# Puts gmx bin into path for the script
-export PATH=$PATH:${ROOT}/Gromacs/build-threads/bin
-
 # Extracts the stmv topology if we didn't do that already
 if [ -e stmv/stmv.tar.gz ] && [ ! -e stmv/topol.tpr ]; then
   tar xzvf stmv/stmv.tar.gz -C stmv/
 fi
 
-# runs just STMV for validation on a single GPU and the 24 first cores
-export GPUID=0
-$ROOT/Gromacs/build-threads/bin/gmx mdrun -resetstep 8000 -nsteps 10000 -v -stepout 1000 -noconfout -nstlist 300 -nb gpu -bonded gpu -pme gpu -update gpu -pin on -ntmpi 1 -ntomp 24 -g md_1gpu.log -gpu_id $GPUID -s stmv/topol.tpr -tunepme no
+if [ "$1" = "test" ]; then
+  ./run_stmv.sh
+fi
 
-# runs tmpi benchmarks for validation
-# ./run_benchmarks.sh -t tmpi 
