@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # runs just STMV for validation on a single GPU and the 24 first cores
 export GPUID=0123
 export ROOT=$(pwd)
