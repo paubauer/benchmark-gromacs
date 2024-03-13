@@ -7,9 +7,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPICH_DIR/lib
 
 export ARCH_BUILDS=gfx908,gfx90a,gfx940,gfx942
 
-if [ ! -d ./Gromacs ]; then
-  git clone https://github.com/ROCmSoftwarePlatform/Gromacs.git -b develop_2023_amd_sprint_rocm6 Gromacs
-  mkdir Gromacs/build-mpi && cd Gromacs/build-mpi
+if [ ! -d ./Gromacs-mpi ]; then
+  git clone https://github.com/ROCmSoftwarePlatform/Gromacs.git -b develop_2023_amd_sprint_rocm6 Gromacs-mpi
+  mkdir Gromacs-mpi/build-mpi && cd Gromacs-mpi/build-mpi
 
 
     # runs cmake on GROMACS to produce a tmpi build of gromacs
