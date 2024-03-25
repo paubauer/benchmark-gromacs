@@ -5,7 +5,7 @@ export MPICH_DIR=/opt/ompi-5.0.0
 export PATH=$PATH:$MPICH_DIR/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPICH_DIR/lib
 
-export ARCH_BUILDS=gfx908,gfx90a,gfx940,gfx942
+export ARCH_BUILDS=gfx908,gfx90a,gfx940,gfx941,gfx942
 
 if [ ! -d ./Gromacs-mpi ]; then
   git clone https://github.com/ROCmSoftwarePlatform/Gromacs.git -b develop_2023_amd_sprint_rocm6 Gromacs-mpi

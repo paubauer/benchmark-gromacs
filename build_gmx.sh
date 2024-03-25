@@ -1,5 +1,5 @@
 #!/bin/bash
-export ARCH_BUILDS=gfx908,gfx90a,gfx940,gfx942
+export ARCH_BUILDS=gfx908,gfx90a,gfx940,gfx941,gfx942
 
 if [ ! -d ./Gromacs ]; then
   git clone https://github.com/ROCmSoftwarePlatform/Gromacs.git -b develop_2023_amd_sprint_rocm6 Gromacs
