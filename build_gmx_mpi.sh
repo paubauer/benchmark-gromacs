@@ -1,6 +1,49 @@
 #!/bin/bash
 export ROCM_PATH=/opt/rocm
-export MPICH_DIR=/opt/ompi-5.0.0
+#export MPICH_DIR=/opt/ompi-5.0.0
+for i in "$@"; do
+    case "$1" in     
+        -with-mpi=*|--with-mpi=*)
+	    mpi="${i#*=}"
+	    shift # past argument=value
+	    ;;
+	--)
+            shift
+            break
+            ;;
+    esac
+done
+echo $mpi
+
+# --with-mpi = /opt/ompi
+# then $mpi =  /opt/ompi
+
+# if --with-mpi is not passed, $mpi is empty
+
+#if mpi is not set, do auto check
+if [ -z ${mpi+x} ];#check if value is passed as an arg
+then
+  echo "checking for existing /opt/ompi"
+  #attempt to read any ompi version in /opt
+  mpi=$(readlink -f /opt/omp*)
+  if test -d $mpi; then
+    echo "Found" $mpi"! exporting as MPICH_DIR"
+	  export PATH=$mpi/bin/:$PATH
+    export MPICH_DIR=$mpi
+  else
+    echo "Could NOT find MPI Path. Exiting"
+    exit 1
+  fi
+else
+    if test -d $mpi/; #check value of passed argument
+    then
+      export PATH=$mpi/bin/:$PATH
+      export MPICH_DIR=$mpi
+    else
+      echo "MPI arg not a real path. Exiting"
+      exit 1
+    fi
+fi
 
 export PATH=$PATH:$MPICH_DIR/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPICH_DIR/lib

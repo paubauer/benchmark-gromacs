@@ -42,7 +42,7 @@ fi
 export PATH=$PATH:$MPICH_DIR/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPICH_DIR/lib
 
-export GPUID=0
+export GPUID=0123
 export ROOT=$(pwd)
 
 export MPICH_GPU_SUPPORT_ENABLED=1
