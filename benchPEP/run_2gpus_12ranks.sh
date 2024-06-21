@@ -19,13 +19,13 @@ export GMX_FORCE_UPDATE_DEFAULT_GPU=true
 export HSA_ENABLE_SDMA=1
 
 
-export GPUID=0
+export GPUID=01
 export ROOT=$(pwd)/..
 
 mpirun -x HIP_VISIBLE_DEVICES=0,1,2,3 --mca pml ucx -x UCX_MM_SEG_SIZE=60k --mca coll_ucc_enable 1 --mca coll_ucc_priority 100  \
        -x UCX_ROCM_COPY_H2D_THRESH=256 \
-       -np 4 ./set_mpi_affinities_4ranks.sh \
+       -np 12 \
        $ROOT/Gromacs-mpi/build-mpi/bin/gmx_mpi mdrun \
-       -maxh 0.05 -resethway -nsteps -1 -v -stepout 100 -noconfout -nstlist 300 \
-       -nb gpu -bonded gpu -pme gpu -update cpu -pin auto -ntomp 12 -npme 1 -g md_1gpu.log \
-       -gpu_id $GPUID -s benchPEP.tpr -tunepme no
+       -maxh 0.42 -resethway -nsteps -1 -v -stepout 1 -noconfout -nstlist 400 \
+       -nb gpu -bonded gpu -pme gpu -update cpu -pin on -ntomp 4 -npme 1 -g md_1gpu.log \
+       -gpu_id $GPUID -s benchPEP.tpr -tunepme no -dlb yes
