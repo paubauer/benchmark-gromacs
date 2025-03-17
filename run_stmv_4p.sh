@@ -2,7 +2,7 @@
 
 # runs just STMV for validation on a single GPU and the 24 first cores
 export GPUID=0123
-export ROOT=$(pwd)
+export BINDIR=$(pwd)/$1
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 export GMX_ENABLE_DIRECT_GPU_COMM=1
@@ -14,4 +14,4 @@ export GMX_GPU_PME_PP_COMMS=true
 export GMX_FORCE_GPU_AWARE_MPI=true
 export GMX_FORCE_UPDATE_DEFAULT_GPU=true
 
-numactl -C 0-95 $ROOT/Gromacs/build-threads/bin/gmx mdrun -resethway -nsteps 10000 -v -stepout 1000 -noconfout -nstlist 300 -nb gpu -bonded gpu -pme gpu -update gpu -ntmpi 4 -ntomp 24 -npme 1 -g md_1gpu.log -gpu_id $GPUID -s stmv/topol.tpr -tunepme no 
+numactl -C 0-95 $BINDIR/gmx mdrun -resethway -nsteps -1 -maxh 0.2 -v -stepout 1000 -noconfout -nstlist 300 -nb gpu -bonded gpu -pme gpu -update gpu -ntmpi 4 -ntomp 24 -npme 1 -g md_4gpu.log -gpu_id $GPUID -s stmv/topol.tpr -tunepme no 
