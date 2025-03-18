@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export GPUID=01234567
-export BINDIR=$(pwd)/$1
+export BINDIR=$1
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 export GMX_ENABLE_DIRECT_GPU_COMM=1

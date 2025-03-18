@@ -2,7 +2,7 @@
 
 # runs just STMV for validation on a single GPU and the 24 first cores
 export GPUID=0123
-export BINDIR=$(pwd)/$1
+export BINDIR=$1
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 export GMX_ENABLE_DIRECT_GPU_COMM=1
